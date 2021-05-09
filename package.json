@@ -1,5 +1,5 @@
 {
-  "name": "temp",
+  "name": "video-conferencing",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,8 +8,29 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "10.2.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "@tensorflow-models/handpose": "^0.0.7",
+    "@tensorflow/tfjs": "^3.2.0",
+    "@tensorflow/tfjs-backend-webgl": "3.3.0",
+    "@tensorflow/tfjs-converter": "3.3.0",
+    "@tensorflow/tfjs-core": "3.3.0",
+    "fingerpose": "^0.0.2",
+    "firebase": "^8.5.0",
+    "next": "10.0.7",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-webcam": "^5.2.3",
+    "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.31",
+    "@types/react": "^17.0.2",
+    "@types/styled-components": "^5.1.7",
+    "babel-plugin-styled-components": "^1.12.0",
+    "prettier": "^2.2.1",
+    "tslib": "2.1.0",
+    "typescript": "^4.2.2"
+  },
+  "resolutions": {
+    "styled-components": "^5"
   }
 }
