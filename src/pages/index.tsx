@@ -1,13 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import * as tf from "@tensorflow/tfjs";
+// import * as tf from "@tensorflow/tfjs";
 import * as handpose from "@tensorflow-models/handpose";
 import Webcam from "react-webcam";
 import { drawHand } from "../components/utilities";
 import "@tensorflow/tfjs-backend-webgl";
-// import { auth } from '../firebase';
+import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/router";
+import Error from "../components/Error";
 
 const Body = (): JSX.Element => {
+  const { user } = useAuth();
+  const router = useRouter();
   const [threeMenuOn, setThreeMenuOn] = useState(false);
   const [settingsMenuOn, setSettingsMenuOn] = useState(false);
   const webcamRef = useRef<Webcam | null>(null);
@@ -79,6 +83,10 @@ const Body = (): JSX.Element => {
   useEffect(() => {
     runHandpose();
   }, []);
+
+  if (!user) {
+    return <Error message="Please login first" to="/Login" where="Login" />;
+  }
 
   return (
     <Container showLeftBar={showLeftBar} streaming={streaming}>
@@ -205,6 +213,14 @@ const Body = (): JSX.Element => {
               setShowRightBar(!showRightBar);
             }}
           />
+          {!!user && (
+            <button
+              className="signInOut"
+              onClick={() => router.push("/Logout")}
+            >
+              Log out
+            </button>
+          )}
         </div>
       </div>
     </Container>
@@ -383,6 +399,12 @@ const Container = styled.div<TContainerProps>`
       display: flex;
       align-items: center;
       justify-content: flex-end;
+    }
+    .signInOut {
+      background: transparent;
+      border: none;
+      color: #fff;
+      cursor: pointer;
     }
   }
 `;

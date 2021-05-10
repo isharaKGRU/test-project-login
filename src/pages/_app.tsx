@@ -2,6 +2,7 @@ import "../styles/common/normalize.css";
 import "../styles/common/global.css";
 import { AppProps } from "next/app";
 import Head from "next/head";
+import { AuthProvider } from "../context/AuthContext";
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   return (
@@ -44,7 +45,9 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
           rel="stylesheet"
         />
       </Head>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </>
   );
 }
