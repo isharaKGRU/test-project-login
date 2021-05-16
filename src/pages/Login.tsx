@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useAuth } from "../context/AuthContext";
+import { signIn } from "next-auth/client";
 
 const Login = (): JSX.Element => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { log_in, sign_up } = useAuth();
   return (
     <Container>
       <form action="" className="form">
@@ -28,17 +27,14 @@ const Login = (): JSX.Element => {
             setPassword(ele.currentTarget.value);
           }}
         />
-        <button
-          className="form-sign-in"
-          onClick={() => log_in(email, password)}
-        >
-          Sign in{" "}
-        </button>
+        <button className="form-sign-in">Sign in</button>
         <div className="sign-link-cover">
           Not yet register?&nbsp;
-          <span className="sign-link" onClick={() => sign_up(email, password)}>
-            Sign up
-          </span>
+          <span className="sign-link">Sign up</span>
+        </div>
+        <div className="githubBtn" onClick={() => signIn()}>
+          <img src={`/images/github.png`} alt="" className="githubIcon" />
+          Git Hub
         </div>
       </form>
     </Container>
@@ -81,10 +77,41 @@ const Container = styled.div`
     border-radius: 50px;
     padding: 0.5em 1.5em;
     margin: 1rem 0;
+    background: #8b0000;
+    color: #fff;
+    font-weight: 900;
+    text-transform: uppercase;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+    &:active {
+      transform: translateY(20px);
+    }
   }
 
   .sign-link {
     text-decoration: underline;
+  }
+
+  .githubBtn {
+    border: 1px solid #333;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 20px;
+    margin-top: 20px;
+    background: #fff;
+    font-weight: 900;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+    &:active {
+      transform: translateY(20px);
+    }
+  }
+  .githubIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
   }
 `;
 

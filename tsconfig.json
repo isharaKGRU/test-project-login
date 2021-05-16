@@ -32,7 +32,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/pages/SignUp.tsx",
+    "src/pages/signup.tsx",
     "src/pages/SignIn.jsx"
   ],
   "exclude": ["node_modules"]

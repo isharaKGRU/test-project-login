@@ -2,7 +2,7 @@ import "../styles/common/normalize.css";
 import "../styles/common/global.css";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { AuthProvider } from "../context/AuthContext";
+import { Provider } from "next-auth/client";
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   return (
@@ -45,9 +45,15 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
           rel="stylesheet"
         />
       </Head>
-      <AuthProvider>
+      <Provider
+        options={{
+          clientMaxAge: 0,
+          keepAlive: 0,
+        }}
+        session={pageProps.session}
+      >
         <Component {...pageProps} />
-      </AuthProvider>
+      </Provider>
     </>
   );
 }
